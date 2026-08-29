@@ -1,0 +1,44 @@
+{# فوتر رئيسي: عن المتجر، روابط سريعة، خدمة العملاء، النشرة البريدية #}
+<div class="max-w-container mx-auto px-4 py-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+
+    <div>
+        {% if store.logo %}
+            <img src="{{ store.logo }}" alt="{{ store.name }}" class="h-8 w-auto mb-4 {% if theme.settings.get('footer_is_dark') %}brightness-0 invert{% endif %}">
+        {% else %}
+            <h3 class="font-bold text-lg mb-4">{{ store.name }}</h3>
+        {% endif %}
+        <p class="text-sm opacity-70 leading-relaxed">{{ store.description|default('')|slice(0, 140) }}</p>
+        {% include 'components/footer/social-links' %}
+    </div>
+
+    <div>
+        <h4 class="font-semibold mb-4">{{ trans('footer.quick_links')|default('روابط سريعة') }}</h4>
+        <ul class="space-y-2.5 text-sm opacity-80">
+            <li><a href="{{ link('/') }}" class="hover:text-accent transition-colors">{{ trans('common.home')|default('الرئيسية') }}</a></li>
+            <li><a href="{{ page('brands') }}" class="hover:text-accent transition-colors">{{ trans('common.brands')|default('الماركات') }}</a></li>
+            <li><a href="{{ page('blog') }}" class="hover:text-accent transition-colors">{{ trans('common.blog')|default('المدونة') }}</a></li>
+            <li><a href="{{ page('order-tracking') }}" class="hover:text-accent transition-colors">{{ trans('pages.track_order')|default('تتبع طلبك') }}</a></li>
+        </ul>
+    </div>
+
+    <div>
+        <h4 class="font-semibold mb-4">{{ trans('footer.customer_service')|default('خدمة العملاء') }}</h4>
+        <ul class="space-y-2.5 text-sm opacity-80">
+            <li><a href="{{ page('page-single', {slug: 'privacy-policy'}) }}" class="hover:text-accent transition-colors">{{ trans('footer.privacy_policy')|default('سياسة الخصوصية') }}</a></li>
+            <li><a href="{{ page('page-single', {slug: 'terms-and-conditions'}) }}" class="hover:text-accent transition-colors">{{ trans('footer.terms')|default('الشروط والأحكام') }}</a></li>
+            <li><a href="mailto:{{ store.email }}" class="hover:text-accent transition-colors">{{ trans('common.contact_us')|default('تواصل معنا') }}</a></li>
+        </ul>
+    </div>
+
+    <div>
+        <h4 class="font-semibold mb-4">{{ trans('footer.newsletter')|default('النشرة البريدية') }}</h4>
+        <p class="text-sm opacity-70 mb-3">{{ trans('footer.newsletter_desc')|default('اشترك ليصلك كل جديد وعروضنا الحصرية') }}</p>
+        <form class="newsletter-form flex" action="#" method="post">
+            <input type="email" required placeholder="{{ trans('footer.email_placeholder')|default('بريدك الإلكتروني') }}"
+                   class="flex-1 rounded-s-pill px-4 py-2.5 text-sm text-neutral-900 focus:outline-none">
+            <button type="submit" class="bg-accent hover:bg-accent-dark transition-colors rounded-e-pill px-4">
+                <i class="sicon-paper-plane text-white" aria-hidden="true"></i>
+            </button>
+        </form>
+    </div>
+</div>

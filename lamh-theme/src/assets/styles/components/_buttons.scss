@@ -1,0 +1,20 @@
+// أزرار موحّدة — لون تمييز واحد فقط، بلا تدرجات لونية متعددة (هوية مينيمال)
+.btn,
+.add-to-cart-btn,
+.checkout-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.quantity-input button {
+    -webkit-tap-highlight-color: transparent;
+
+    &:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+    }
+}

@@ -1,0 +1,29 @@
+{% set featured = component('home.featured-collection') %}
+{% set products = featured.source == 'best_selling'
+    ? (best_selling_products|default([]))
+    : (featured.source == 'specific_category' and featured.category)
+        ? (featured.category.products|default([]))
+        : (latest_products|default([])) %}
+
+{% if featured and products|length %}
+<section class="featured-collection bg-neutral-50" aria-label="{{ featured.title }}">
+    <div class="max-w-container mx-auto px-4 py-14">
+        <div class="flex items-end justify-between mb-8">
+            <div>
+                <h2 class="text-xl sm:text-2xl font-bold text-neutral-900">{{ featured.title }}</h2>
+                {% if featured.subtitle %}<p class="text-neutral-500 text-sm mt-1">{{ featured.subtitle }}</p>{% endif %}
+            </div>
+            <a href="{{ page('product.index') }}" class="hidden sm:inline-flex items-center gap-1 text-accent text-sm font-medium hover:text-accent-dark">
+                {{ trans('common.view_all')|default('عرض الكل') }}
+                <i class="sicon-arrow-left rtl:rotate-180" aria-hidden="true"></i>
+            </a>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+            {% for product in products|slice(0, featured.limit|default(8)) %}
+                {% include 'pages/partials/product/card' with {product: product} %}
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}

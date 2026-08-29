@@ -1,0 +1,33 @@
+// إعادة ضبط أساسية فوق Tailwind Preflight
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-family, 'IBM Plex Sans Arabic'), 'Tajawal', sans-serif;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+.skip-to-content {
+    position: absolute;
+    inset-inline-start: -999px;
+    top: 0;
+    background: var(--color-accent, #0E7C6B);
+    color: #fff;
+    padding: 0.75rem 1.25rem;
+    border-radius: 0 0 8px 0;
+    z-index: 100;
+
+    &:focus {
+        inset-inline-start: 0;
+    }
+}
+
+// دعم RTL/LTR للأيقونات الاتجاهية (أسهم، شيفرون)
+[dir='rtl'] .rtl\:rotate-180 {
+    transform: rotate(180deg);
+}

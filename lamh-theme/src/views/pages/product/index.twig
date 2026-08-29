@@ -1,0 +1,67 @@
+{% extends 'layouts/master' %}
+
+{#
+  صفحة قائمة منتجات موحّدة تُستخدم لعرض: تصنيف، نتائج بحث، علامة تجارية، عرض/تخفيضات
+  (كما هو موثّق في صفحات سلة القياسية) — المتغيّرات (category, products, filters) تُمرَّر من محرك سلة.
+#}
+
+{% block title %}{{ category.name|default(tag.name|default(trans('pages.products')|default('المنتجات'))) }}{% endblock %}
+
+{% block content %}
+    {% if theme.settings.get('show_breadcrumb') %}
+        {% include 'components/header/breadcrumb' with {items: breadcrumbs|default([])} %}
+    {% endif %}
+
+    <div class="max-w-container mx-auto px-4 py-8">
+        <div class="flex items-start justify-between gap-4 mb-6 flex-wrap">
+            <div>
+                <h1 class="text-2xl font-bold text-neutral-900">{{ category.name|default(tag.name|default(trans('pages.all_products')|default('كل المنتجات'))) }}</h1>
+                {% if category.description %}
+                    <p class="text-sm text-neutral-500 mt-1 max-w-2xl">{{ category.description }}</p>
+                {% endif %}
+            </div>
+
+            <div class="flex items-center gap-3">
+                <button type="button" class="lg:hidden filters-toggle inline-flex items-center gap-1.5 text-sm border border-neutral-200 rounded-pill px-4 py-2">
+                    <i class="sicon-filter" aria-hidden="true"></i> {{ trans('common.filter')|default('تصفية') }}
+                </button>
+                <select class="sort-select text-sm border border-neutral-200 rounded-pill px-4 py-2" data-component="sort-select">
+                    <option value="latest">{{ trans('sort.latest')|default('الأحدث') }}</option>
+                    <option value="best_selling">{{ trans('sort.best_selling')|default('الأكثر مبيعًا') }}</option>
+                    <option value="price_asc">{{ trans('sort.price_asc')|default('السعر: من الأقل للأعلى') }}</option>
+                    <option value="price_desc">{{ trans('sort.price_desc')|default('السعر: من الأعلى للأقل') }}</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-[260px_1fr] gap-8">
+            <aside class="filters-sidebar hidden lg:block">
+                {% include 'components/product/filters' with {filters: filters|default([])} %}
+            </aside>
+
+            <div>
+                {% if products|default([])|length %}
+                    <div class="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+                        {% for product in products %}
+                            {% include 'pages/partials/product/card' with {product: product} %}
+                        {% endfor %}
+                    </div>
+
+                    {% if pagination is defined %}
+                        <div class="mt-10 flex justify-center">{{ pagination }}</div>
+                    {% endif %}
+                {% else %}
+                    {% include 'pages/partials/empty-state' with {
+                        icon: 'sicon-shopping-bag',
+                        title: trans('product.no_products_found')|default('لا توجد منتجات هنا حاليًا'),
+                        text: trans('product.check_back_later')|default('تابعنا قريبًا، سنضيف منتجات جديدة.')
+                    } %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script src="{{ 'products.js'|asset }}" defer></script>
+{% endblock %}

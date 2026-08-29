@@ -1,0 +1,59 @@
+{#
+  بطاقة منتج موحّدة تُستخدم في: الرئيسية، شبكة المنتجات، نتائج البحث، الشبيهة، تصنيف/علامة.
+  props: product
+#}
+<div class="product-card group relative flex flex-col bg-white rounded-card border border-neutral-100 hover:shadow-card-hover hover:border-transparent transition-all overflow-hidden"
+     data-product-id="{{ product.id }}">
+
+    <a href="{{ product.url }}" class="block relative aspect-square overflow-hidden bg-neutral-50">
+        <img src="{{ product.image.url|default(product.image) }}" alt="{{ product.name }}" loading="lazy"
+             class="w-full h-full transition-transform duration-500 group-hover:scale-105 {{ theme.settings.get('product_image_fit')|default('cover') == 'contain' ? 'object-contain p-4' : 'object-cover' }}">
+
+        {% if product.sale_price and product.sale_price < product.price %}
+            <span class="absolute top-3 start-3 bg-accent text-white text-xs font-semibold px-2.5 py-1 rounded-pill">
+                {{ trans('product.discount')|default('خصم') }}
+                {{ (((product.price - product.sale_price) / product.price) * 100)|round }}%
+            </span>
+        {% endif %}
+
+        <button type="button" class="wishlist-toggle absolute top-3 end-3 w-8 h-8 rounded-full bg-white/90 flex items-center justify-center text-neutral-500 hover:text-accent transition-colors"
+                data-product-id="{{ product.id }}" aria-label="{{ trans('common.add_to_wishlist')|default('أضف للمفضلة') }}">
+            <i class="sicon-heart" aria-hidden="true"></i>
+        </button>
+    </a>
+
+    <div class="p-4 flex flex-col gap-1.5 flex-1">
+        {% if product.brand %}
+            <span class="text-xs text-neutral-400">{{ product.brand.name }}</span>
+        {% endif %}
+
+        <a href="{{ product.url }}" class="font-medium text-sm text-neutral-900 line-clamp-2 hover:text-accent transition-colors">
+            {{ product.name }}
+        </a>
+
+        {% if theme.settings.get('show_ratings') and product.rating|default(0) > 0 %}
+            <div class="flex items-center gap-1 text-xs text-neutral-400">
+                <salla-rating rating="{{ product.rating }}" read-only></salla-rating>
+                <span>({{ product.rating_count|default(0) }})</span>
+            </div>
+        {% endif %}
+
+        <div class="mt-auto pt-2 flex items-center justify-between gap-2">
+            <div class="flex items-baseline gap-2">
+                {% if product.sale_price and product.sale_price < product.price %}
+                    <span class="font-bold text-accent">{{ product.sale_price|currency }}</span>
+                    <span class="text-xs text-neutral-400 line-through">{{ product.price|currency }}</span>
+                {% else %}
+                    <span class="font-bold text-neutral-900">{{ product.price|currency }}</span>
+                {% endif %}
+            </div>
+
+            {% if theme.settings.get('show_quick_add') and product.status == 'sale' %}
+                <button type="button" class="quick-add-btn w-9 h-9 rounded-full bg-accent-light text-accent hover:bg-accent hover:text-white transition-colors flex items-center justify-center"
+                        data-product-id="{{ product.id }}" aria-label="{{ trans('common.add_to_cart')|default('أضف للسلة') }}">
+                    <i class="sicon-shopping-bag-add" aria-hidden="true"></i>
+                </button>
+            {% endif %}
+        </div>
+    </div>
+</div>

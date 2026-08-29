@@ -1,0 +1,120 @@
+{
+  "common": {
+    "home": "Home",
+    "search_placeholder": "Search for a product...",
+    "search": "Search",
+    "wishlist": "Wishlist",
+    "account": "My Account",
+    "cart": "Cart",
+    "add_to_cart": "Add to Cart",
+    "add_to_wishlist": "Add to Wishlist",
+    "view_all": "View All",
+    "filter": "Filter",
+    "clear_filters": "Clear Filters",
+    "brands": "Brands",
+    "blog": "Blog",
+    "contact_us": "Contact Us",
+    "contact_whatsapp": "Contact via WhatsApp",
+    "apply": "Apply",
+    "save_changes": "Save Changes",
+    "continue_shopping": "Continue Shopping",
+    "breadcrumb": "Breadcrumb",
+    "open_menu": "Open Menu",
+    "anonymous": "Customer",
+    "skip_to_content": "Skip to content",
+    "slide": "Slide"
+  },
+  "pages": {
+    "track_order": "Track Your Order",
+    "about_us": "About Us",
+    "products": "Products",
+    "all_products": "All Products",
+    "landing_page": "Special Offer"
+  },
+  "product": {
+    "discount": "Off",
+    "reviews": "reviews",
+    "similar_products": "Similar Products",
+    "full_description": "Product Details",
+    "no_products_found": "No products here yet",
+    "check_back_later": "Check back soon, new products are on the way.",
+    "no_reviews_yet": "No reviews yet",
+    "be_first_to_review": "Be the first to review this product",
+    "out_of_stock": "Out of Stock",
+    "sku": "SKU",
+    "tax_included": "Tax included",
+    "installments_from": "Or split it interest-free"
+  },
+  "sort": {
+    "latest": "Newest",
+    "best_selling": "Best Selling",
+    "price_asc": "Price: Low to High",
+    "price_desc": "Price: High to Low"
+  },
+  "cart": {
+    "remove": "Remove",
+    "order_summary": "Order Summary",
+    "subtotal": "Subtotal",
+    "discount": "Discount",
+    "shipping": "Shipping",
+    "calculated_at_checkout": "Calculated at checkout",
+    "coupon_code": "Coupon code",
+    "total": "Total",
+    "checkout": "Checkout",
+    "empty_cart": "Your cart is empty",
+    "start_shopping": "Browse our products and add what you like",
+    "browse_products": "Browse Products",
+    "quantity": "Quantity"
+  },
+  "order": {
+    "thank_you": "Thank you, your order has been received!",
+    "confirmation_sent": "We sent order details to your email and will keep you updated.",
+    "order_number": "Order Number",
+    "payment_method": "Payment Method",
+    "track_order": "Track Order"
+  },
+  "footer": {
+    "quick_links": "Quick Links",
+    "customer_service": "Customer Service",
+    "privacy_policy": "Privacy Policy",
+    "terms": "Terms & Conditions",
+    "newsletter": "Newsletter",
+    "newsletter_desc": "Subscribe to get the latest updates and exclusive offers",
+    "email_placeholder": "Your email address",
+    "rights_reserved": "All rights reserved",
+    "powered_by": "Powered by"
+  },
+  "customer": {
+    "my_account": "My Account",
+    "profile_info": "Profile Information",
+    "full_name": "Full Name",
+    "email": "Email",
+    "mobile": "Mobile Number",
+    "my_orders": "My Orders",
+    "notifications": "Notifications",
+    "no_notifications": "No notifications yet",
+    "no_orders": "No previous orders",
+    "empty_wishlist": "Your wishlist is empty",
+    "add_favorites": "Add products you like to find them here later",
+    "logout": "Logout"
+  },
+  "blog": {
+    "no_articles": "No articles yet",
+    "share": "Share article"
+  },
+  "brands": {
+    "no_brands": "No brands added yet"
+  },
+  "loyalty": {
+    "program": "Loyalty Program",
+    "description": "Earn points with every purchase and redeem them for exclusive rewards.",
+    "your_points": "Your current balance",
+    "point": "points"
+  },
+  "countdown": {
+    "days": "Days",
+    "hours": "Hours",
+    "minutes": "Minutes",
+    "seconds": "Seconds"
+  }
+}

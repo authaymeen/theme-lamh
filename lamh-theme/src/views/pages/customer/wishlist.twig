@@ -1,0 +1,29 @@
+{% extends 'layouts/master' %}
+
+{% block title %}{{ trans('common.wishlist')|default('المفضلة') }}{% endblock %}
+
+{% block content %}
+<div class="max-w-container mx-auto px-4 py-10">
+    <div class="grid grid-cols-1 lg:grid-cols-[240px_1fr] gap-8">
+        {% include 'pages/customer/partials/sidebar' with {active: 'wishlist'} %}
+
+        <div>
+            <h1 class="text-xl font-bold text-neutral-900 mb-6">{{ trans('common.wishlist')|default('المفضلة') }}</h1>
+
+            {% if wishlist_products|default([])|length %}
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-6">
+                    {% for product in wishlist_products %}
+                        {% include 'pages/partials/product/card' with {product: product} %}
+                    {% endfor %}
+                </div>
+            {% else %}
+                {% include 'pages/partials/empty-state' with {
+                    icon: 'sicon-heart',
+                    title: trans('customer.empty_wishlist')|default('قائمة المفضلة فارغة'),
+                    text: trans('customer.add_favorites')|default('أضف المنتجات التي تعجبك لتجدها هنا لاحقًا')
+                } %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'layouts/master' %}
+
+{% block title %}{{ trans('order.order_number')|default('طلب') }} #{{ order.id }}{% endblock %}
+
+{% block content %}
+<div class="max-w-container mx-auto px-4 py-10">
+    <div class="grid grid-cols-1 lg:grid-cols-[240px_1fr] gap-8">
+        {% include 'pages/customer/partials/sidebar' with {active: 'orders'} %}
+
+        <div>
+            <div class="flex items-center justify-between mb-6">
+                <h1 class="text-xl font-bold text-neutral-900">{{ trans('order.order_number')|default('طلب') }} #{{ order.id }}</h1>
+                <span class="order-status text-xs font-medium px-3 py-1.5 rounded-pill bg-accent-light text-accent">{{ order.status }}</span>
+            </div>
+
+            <div class="border border-neutral-100 rounded-card divide-y divide-neutral-100 mb-6">
+                {% for item in order.items|default([]) %}
+                    <div class="flex items-center gap-4 p-4">
+                        <img src="{{ item.image }}" alt="{{ item.name }}" class="w-16 h-16 rounded-lg object-cover bg-neutral-50">
+                        <div class="flex-1">
+                            <p class="text-sm font-medium text-neutral-900">{{ item.name }}</p>
+                            <p class="text-xs text-neutral-400 mt-1">{{ trans('cart.quantity')|default('الكمية') }}: {{ item.quantity }}</p>
+                        </div>
+                        <span class="text-sm font-bold text-neutral-900">{{ item.total|currency }}</span>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <div class="border border-neutral-100 rounded-card p-5 max-w-sm ms-auto space-y-2 text-sm">
+                <div class="flex justify-between text-neutral-500"><span>{{ trans('cart.subtotal')|default('المجموع الفرعي') }}</span><span>{{ order.sub_total|currency }}</span></div>
+                <div class="flex justify-between text-neutral-500"><span>{{ trans('cart.shipping')|default('الشحن') }}</span><span>{{ order.shipping_cost|default(0)|currency }}</span></div>
+                <div class="flex justify-between font-bold text-neutral-900 border-t border-neutral-100 pt-2"><span>{{ trans('cart.total')|default('الإجمالي') }}</span><span>{{ order.total|currency }}</span></div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

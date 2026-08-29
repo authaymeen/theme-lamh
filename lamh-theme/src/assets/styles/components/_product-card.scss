@@ -1,0 +1,15 @@
+.product-card {
+    .wishlist-toggle.is-active i {
+        color: var(--color-accent, #0E7C6B);
+
+        &::before {
+            content: '\e9a6'; // sicon-heart-filled (تأكد من كود الأيقونة الفعلي في مجموعة سلة)
+        }
+    }
+}
+
+.option-color-swatch,
+.option-thumb,
+.option-pill {
+    transition: border-color 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+}
