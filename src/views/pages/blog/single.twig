@@ -1,0 +1,30 @@
+{% extends 'layouts/master' %}
+
+{% block title %}{{ article.title }}{% endblock %}
+{% block description %}{{ article.excerpt|default(article.title) }}{% endblock %}
+
+{% block content %}
+    {% if theme.settings.get('show_breadcrumb') %}
+        {% include 'components/header/breadcrumb' with {items: [{title: trans('common.blog')|default('المدونة'), url: page('blog')}, {title: article.title, url: ''}]} %}
+    {% endif %}
+
+    <article class="max-w-3xl mx-auto px-4 py-12">
+        <p class="text-xs text-neutral-400 mb-3">{{ article.date|date }}</p>
+        <h1 class="text-2xl sm:text-3xl font-bold text-neutral-900 mb-6">{{ article.title }}</h1>
+
+        {% if article.image %}
+            <div class="rounded-card overflow-hidden mb-8 aspect-video bg-neutral-50">
+                <img src="{{ article.image }}" alt="{{ article.title }}" class="w-full h-full object-cover">
+            </div>
+        {% endif %}
+
+        <div class="prose prose-neutral max-w-none text-sm sm:text-base leading-relaxed text-neutral-600">
+            {{ article.content|raw }}
+        </div>
+
+        <div class="flex items-center gap-3 mt-10 pt-6 border-t border-neutral-100">
+            <span class="text-sm text-neutral-500">{{ trans('blog.share')|default('شارك المقال') }}:</span>
+            <salla-share-buttons></salla-share-buttons>
+        </div>
+    </article>
+{% endblock %}

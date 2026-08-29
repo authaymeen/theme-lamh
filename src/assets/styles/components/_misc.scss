@@ -1,0 +1,21 @@
+.announcement-bar {
+    letter-spacing: 0.01em;
+}
+
+.empty-state i {
+    line-height: 1;
+}
+
+.category-card img {
+    will-change: transform;
+}
+
+// شريط إضافة سريعة للجوال في صفحة المنتج
+.mobile-add-to-cart-bar {
+    box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.06);
+}
+
+// عدّاد تنازلي لصفحة الهبوط
+.countdown-timer > div {
+    backdrop-filter: blur(4px);
+}

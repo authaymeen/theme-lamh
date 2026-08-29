@@ -1,0 +1,25 @@
+// عناوين متسقة عبر الثيم — الهوية أنيقة/مينيمال فلا نستخدم أوزان ثقيلة جدًا ولا تباعد أحرف كبير
+h1, h2, h3, h4 {
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: theme('colors.neutral.900');
+}
+
+.prose {
+    line-height: 1.9;
+
+    p {
+        margin-bottom: 1.1em;
+    }
+
+    img {
+        border-radius: 14px;
+        margin: 1.5em 0;
+    }
+
+    a {
+        color: var(--color-accent, #0E7C6B);
+        text-decoration: underline;
+        text-underline-offset: 3px;
+    }
+}

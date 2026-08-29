@@ -1,0 +1,26 @@
+{# props: comments, rating — تقييمات/تعليقات المنتج #}
+<div class="comments-section">
+    <div class="flex items-center justify-between mb-6 flex-wrap gap-3">
+        <h2 class="text-lg font-bold text-neutral-900">{{ trans('product.reviews')|default('آراء العملاء') }} ({{ comments|length }})</h2>
+        {% if rating %}
+            <div class="flex items-center gap-2">
+                <salla-rating rating="{{ rating }}" read-only></salla-rating>
+                <span class="text-sm text-neutral-500">{{ rating }}/5</span>
+            </div>
+        {% endif %}
+    </div>
+
+    {% if comments|length %}
+        <div class="space-y-6">
+            {% for comment in comments %}
+                {% include 'pages/partials/single-comment' with {comment: comment} %}
+            {% endfor %}
+        </div>
+    {% else %}
+        {% include 'pages/partials/empty-state' with {
+            icon: 'sicon-chat-bubble',
+            title: trans('product.no_reviews_yet')|default('لا توجد تقييمات بعد'),
+            text: trans('product.be_first_to_review')|default('كن أول من يشارك رأيه في هذا المنتج')
+        } %}
+    {% endif %}
+</div>

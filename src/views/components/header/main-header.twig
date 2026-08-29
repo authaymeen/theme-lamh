@@ -1,0 +1,49 @@
+{# الهيدر الرئيسي: الشعار، البحث، الحساب، المفضلة، السلة #}
+<div class="main-header border-b border-neutral-100 bg-white">
+    <div class="max-w-container mx-auto px-4 py-4 flex items-center gap-4">
+
+        <button type="button" class="lg:hidden p-2 -ms-2" data-toggle="mobile-menu"
+                aria-label="{{ trans('common.open_menu')|default('فتح القائمة') }}">
+            <i class="sicon-menu text-2xl" aria-hidden="true"></i>
+        </button>
+
+        <a href="{{ link('/') }}" class="site-logo shrink-0" aria-label="{{ store.name }}">
+            {% if store.logo %}
+                <img src="{{ store.logo }}" alt="{{ store.name }}" class="h-9 w-auto" loading="eager">
+            {% else %}
+                <span class="text-xl font-bold text-accent">{{ store.name }}</span>
+            {% endif %}
+        </a>
+
+        <div class="hidden md:flex flex-1 max-w-lg mx-auto">
+            <button type="button" class="search-trigger w-full flex items-center gap-2 rounded-pill border border-neutral-200 px-4 py-2.5 text-neutral-400 hover:border-accent transition-colors"
+                    data-open="quick-search">
+                <i class="sicon-search" aria-hidden="true"></i>
+                <span>{{ trans('common.search_placeholder')|default('ابحث عن منتج...') }}</span>
+            </button>
+        </div>
+
+        <div class="flex items-center gap-1 sm:gap-2 ms-auto">
+            <button type="button" class="header-icon-btn md:hidden" data-open="quick-search" aria-label="{{ trans('common.search')|default('بحث') }}">
+                <i class="sicon-search text-xl" aria-hidden="true"></i>
+            </button>
+
+            <a href="{{ page('customer.wishlist') }}" class="header-icon-btn relative" aria-label="{{ trans('common.wishlist')|default('المفضلة') }}">
+                <i class="sicon-heart text-xl" aria-hidden="true"></i>
+                <salla-wishlist-count class="header-badge"></salla-wishlist-count>
+            </a>
+
+            <a href="{{ customer.authenticated ? page('customer.profile') : '#' }}"
+               class="header-icon-btn"
+               {% if not customer.authenticated %}data-open="login-modal"{% endif %}
+               aria-label="{{ trans('common.account')|default('حسابي') }}">
+                <i class="sicon-user text-xl" aria-hidden="true"></i>
+            </a>
+
+            <a href="{{ page('cart') }}" class="header-icon-btn relative" aria-label="{{ trans('common.cart')|default('السلة') }}">
+                <i class="sicon-shopping-bag text-xl" aria-hidden="true"></i>
+                <salla-cart-summary count-only class="header-badge"></salla-cart-summary>
+            </a>
+        </div>
+    </div>
+</div>
