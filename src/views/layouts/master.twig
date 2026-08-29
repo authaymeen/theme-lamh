@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 {#
   لمح (Lamh) — Master Layout
-  يحقن: متغيرات ألوان الهوية (CSS custom properties) من إعدادات الثيم عبر theme.settings.get(),
-  الخطوط، الميتا الأساسي، ويوفر hooks القياسية + blocks القياسية (styles/head/content/script)
-  التي تمتدّ منها كل صفحات src/views/pages/*.
+  ألوان الهوية (أخضر زمردي) والخط ثابتة في src/assets/styles/base/_tokens.scss كمتغيرات CSS —
+  وليست إعدادات عبر بوابة الشركاء (تبسيطًا وتفاديًا لصيغ twilight.json غير الموثّقة رسميًا).
+  يوفر الملف hooks القياسية + blocks القياسية (styles/head/content/script) التي تمتدّ منها كل
+  صفحات src/views/pages/*.
 #}
 <html lang="{{ store.language|default('ar') }}" dir="{{ store.direction|default('rtl') }}" class="no-js">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    <meta name="theme-color" content="{{ theme.settings.get('theme_accent_color')|default('#0E7C6B') }}">
+    <meta name="theme-color" content="#0E7C6B">
 
     {% hook 'head:start' %}
 
@@ -25,15 +26,6 @@
 
     {% hook 'head' %}
 
-    <style>
-        :root{
-            --color-accent: {{ theme.settings.get('theme_accent_color')|default('#0E7C6B') }};
-            --color-accent-dark: {{ theme.settings.get('theme_accent_color_dark')|default('#0B6355') }};
-            --color-accent-light: {{ theme.settings.get('theme_accent_color_light')|default('#E7F5F2') }};
-            --font-family: "{{ theme.settings.get('theme_font')|default('IBM Plex Sans Arabic') }}", "Tajawal", sans-serif;
-        }
-    </style>
-
     <link rel="stylesheet" href="{{ 'app.css'|asset }}">
     {% block styles %}{% endblock %}
 
@@ -42,12 +34,6 @@
 <body class="lamh-theme flex min-h-screen flex-col bg-white text-neutral-900 antialiased{% if theme.settings.get('topnav_is_dark') %} has-dark-topbar{% endif %}">
 
 {% hook 'body:start' %}
-
-{% if theme.settings.get('announcement_bar_text') %}
-    <div class="announcement-bar w-full bg-accent-dark text-white text-center text-sm py-2 px-4">
-        {{ theme.settings.get('announcement_bar_text') }}
-    </div>
-{% endif %}
 
 <a href="#main-content" class="skip-to-content">{{ trans('common.skip_to_content')|default('تخطَّ إلى المحتوى') }}</a>
 
@@ -69,14 +55,6 @@
     {% include 'components/footer/bottom-bar' %}
     {% hook 'footer:end' %}
 </footer>
-
-{% if theme.settings.get('whatsapp_number') %}
-    <a class="whatsapp-float" target="_blank" rel="noopener"
-       href="https://wa.me/{{ theme.settings.get('whatsapp_number') }}"
-       aria-label="{{ trans('common.contact_whatsapp')|default('تواصل عبر واتساب') }}">
-        <i class="sicon-whatsapp" aria-hidden="true"></i>
-    </a>
-{% endif %}
 
 {# مكوّنات سلة الجاهزة (تسجيل الدخول، البحث، السلة، العروض) — من حزمة @salla.sa/twilight-components،
    راجع أسماء العناصر مقابل الإصدار المثبَّت لديك عند أول تشغيل محلي #}

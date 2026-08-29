@@ -1,9 +1,5 @@
 {% set featured = component('home.featured-collection') %}
-{% set products = featured.source == 'best_selling'
-    ? (best_selling_products|default([]))
-    : (featured.source == 'specific_category' and featured.category)
-        ? (featured.category.products|default([]))
-        : (latest_products|default([])) %}
+{% set products = latest_products|default([]) %}
 
 {% if featured and products|length %}
 <section class="featured-collection bg-neutral-50" aria-label="{{ featured.title }}">
@@ -20,7 +16,7 @@
         </div>
 
         <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
-            {% for product in products|slice(0, featured.limit|default(8)) %}
+            {% for product in products|slice(0, 8) %}
                 {% include 'pages/partials/product/card' with {product: product} %}
             {% endfor %}
         </div>
