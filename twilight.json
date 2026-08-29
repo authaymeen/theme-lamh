@@ -1,8 +1,30 @@
 {
-  "version": "1.0.0",
-  "theme_name": "لمح | Lamh",
-  "repo_url": "https://github.com/authaymeen/theme-lamh",
-  "support_url": "mailto:admin@automataiqksa.com",
+  "name": {
+    "ar": "لمح",
+    "en": "Lamh"
+  },
+  "repository": "https://github.com/authaymeen/theme-lamh",
+  "author_email": "admin@automataiqksa.com",
+  "support_url": "https://github.com/authaymeen/theme-lamh/issues",
+  "description": {
+    "ar": "ثيم متجر عام بهوية أنيقة ومينيمال: خلفيات محايدة ولون تمييز واحد، مناسب لأغلب الأنشطة التجارية.",
+    "en": "A general-purpose store theme with an elegant, minimal identity: neutral backgrounds and a single accent color, suited to most business types."
+  },
+
+  "features": [
+    "breadcrumb",
+    "filters",
+    "component-featured-products",
+    "component-fixed-banner",
+    "component-fixed-products",
+    "component-products-slider",
+    "component-photos-slider",
+    "component-parallax-background",
+    "component-testimonials",
+    "component-square-photos",
+    "component-store-features",
+    "component-youtube"
+  ],
 
   "settings": [
     {
@@ -67,97 +89,263 @@
     }
   ],
 
-  "features": [
-    "filters",
-    "component-featured-products",
-    "component-products-slider",
-    "component-photos-slider",
-    "component-testimonials",
-    "component-random-testimonials",
-    "component-store-features",
-    "component-square-photos",
-    "component-fixed-banner",
-    "component-youtube"
-  ],
-
   "components": [
     {
-      "name": "hero-banner",
-      "title": "بانر رئيسي (لمح)",
+      "key": "61425d0e-e359-4778-b62b-c43c76fa2464",
+      "title": {
+        "ar": "بانر رئيسي (لمح)",
+        "en": "Hero Banner (Lamh)"
+      },
       "icon": "sicon-image-carousel",
       "path": "home.hero-banner",
+      "image": "https://raw.githubusercontent.com/authaymeen/theme-lamh/main/src/assets/images/theme-icon.png",
+      "is_default": true,
       "fields": [
         {
           "id": "slides",
           "type": "collection",
           "format": "collection",
           "label": "الشرائح",
+          "item_label": "شريحة",
           "required": true,
           "minLength": 1,
           "maxLength": 5,
+          "value": [
+            {
+              "slides.image": "https://raw.githubusercontent.com/authaymeen/theme-lamh/main/src/assets/images/theme-icon.png",
+              "slides.title": "أهلًا بك في متجرنا",
+              "slides.subtitle": "تشكيلة مختارة بعناية",
+              "slides.button_text": "تسوّق الآن",
+              "slides.button_link": "#"
+            }
+          ],
           "fields": [
-            { "id": "image", "type": "string", "format": "image", "label": "صورة الشريحة (يفضّل 1920×800)", "required": true },
-            { "id": "title", "type": "string", "label": "العنوان", "required": false },
-            { "id": "subtitle", "type": "string", "label": "العنوان الفرعي", "required": false },
-            { "id": "button_text", "type": "string", "label": "نص الزر", "required": false },
-            { "id": "button_link", "type": "string", "format": "url", "label": "رابط الزر", "required": false }
+            {
+              "id": "slides.image",
+              "type": "string",
+              "format": "image",
+              "icon": "sicon-image",
+              "label": "صورة الشريحة",
+              "description": "المقاس المناسب للصورة هو 1920×800 بكسل",
+              "required": true
+            },
+            {
+              "id": "slides.title",
+              "type": "string",
+              "format": "text",
+              "icon": "sicon-format-text-alt",
+              "label": "العنوان",
+              "multilanguage": true,
+              "required": false,
+              "minLength": 0,
+              "maxLength": 100
+            },
+            {
+              "id": "slides.subtitle",
+              "type": "string",
+              "format": "text",
+              "icon": "sicon-typography",
+              "label": "العنوان الفرعي",
+              "multilanguage": true,
+              "required": false,
+              "minLength": 0,
+              "maxLength": 150
+            },
+            {
+              "id": "slides.button_text",
+              "type": "string",
+              "format": "text",
+              "icon": "sicon-format-text-alt",
+              "label": "نص الزر",
+              "multilanguage": true,
+              "required": false,
+              "minLength": 0,
+              "maxLength": 40
+            },
+            {
+              "id": "slides.button_link",
+              "type": "items",
+              "format": "variable-list",
+              "icon": "sicon-link",
+              "label": "رابط الزر",
+              "required": false,
+              "searchable": true,
+              "source": "custom",
+              "sources": [
+                { "label": "منتج", "key": "products", "value": "products" },
+                { "label": "تصنيف", "key": "categories", "value": "categories" },
+                { "label": "ماركة تجارية", "key": "brands", "value": "brands" },
+                { "label": "صفحة تعريفية", "key": "pages", "value": "pages" },
+                { "label": "التخفيضات", "key": "offers_link", "value": "offers_link" },
+                { "label": "رابط خارجي", "key": "custom", "value": "custom" }
+              ]
+            }
           ]
         }
       ]
     },
     {
-      "name": "categories-grid",
-      "title": "شبكة تصنيفات (لمح)",
+      "key": "a8998a99-0669-4e25-bc2b-6f6e23944fc5",
+      "title": {
+        "ar": "شبكة تصنيفات (لمح)",
+        "en": "Categories Grid (Lamh)"
+      },
       "icon": "sicon-grid",
       "path": "home.categories-grid",
+      "image": "https://raw.githubusercontent.com/authaymeen/theme-lamh/main/src/assets/images/theme-icon.png",
+      "is_default": true,
       "fields": [
-        { "id": "title", "type": "string", "label": "عنوان القسم", "required": false, "value": "تسوّق حسب التصنيف" },
+        {
+          "id": "title",
+          "type": "string",
+          "format": "text",
+          "icon": "sicon-format-text-alt",
+          "label": "عنوان القسم",
+          "multilanguage": true,
+          "required": false,
+          "value": "تسوّق حسب التصنيف",
+          "minLength": 0,
+          "maxLength": 100
+        },
         {
           "id": "categories",
           "type": "collection",
           "format": "collection",
           "label": "التصنيفات",
+          "item_label": "تصنيف",
           "required": true,
           "minLength": 2,
           "maxLength": 8,
           "fields": [
-            { "id": "image", "type": "string", "format": "image", "label": "صورة التصنيف (مربّعة)", "required": true },
-            { "id": "title", "type": "string", "label": "اسم التصنيف", "required": true },
-            { "id": "link", "type": "string", "format": "url", "label": "رابط التصنيف", "required": true }
+            {
+              "id": "categories.image",
+              "type": "string",
+              "format": "image",
+              "icon": "sicon-image",
+              "label": "صورة التصنيف (مربّعة)",
+              "required": true
+            },
+            {
+              "id": "categories.title",
+              "type": "string",
+              "format": "text",
+              "icon": "sicon-format-text-alt",
+              "label": "اسم التصنيف",
+              "multilanguage": true,
+              "required": true,
+              "minLength": 1,
+              "maxLength": 60
+            },
+            {
+              "id": "categories.link",
+              "type": "items",
+              "format": "variable-list",
+              "icon": "sicon-link",
+              "label": "رابط التصنيف",
+              "required": true,
+              "searchable": true,
+              "source": "custom",
+              "sources": [
+                { "label": "تصنيف", "key": "categories", "value": "categories" },
+                { "label": "منتج", "key": "products", "value": "products" },
+                { "label": "ماركة تجارية", "key": "brands", "value": "brands" },
+                { "label": "رابط خارجي", "key": "custom", "value": "custom" }
+              ]
+            }
           ]
         }
       ]
     },
     {
-      "name": "value-props",
-      "title": "مزايا المتجر (لمح)",
+      "key": "e5539cb9-9cc2-4bb3-949a-a4f94ff9a8f2",
+      "title": {
+        "ar": "مزايا المتجر (لمح)",
+        "en": "Store Value Props (Lamh)"
+      },
       "icon": "sicon-badge-discount",
       "path": "home.value-props",
+      "image": "https://raw.githubusercontent.com/authaymeen/theme-lamh/main/src/assets/images/theme-icon.png",
+      "is_default": true,
       "fields": [
         {
           "id": "items",
           "type": "collection",
           "format": "collection",
           "label": "المزايا",
+          "item_label": "ميزة",
           "required": true,
           "minLength": 2,
           "maxLength": 4,
           "fields": [
-            { "id": "icon", "type": "string", "label": "اسم أيقونة سلة (مثال: sicon-shipping-fast)", "required": true },
-            { "id": "title", "type": "string", "label": "العنوان", "required": true },
-            { "id": "text", "type": "string", "format": "textarea", "label": "وصف مختصر", "required": false }
+            {
+              "id": "items.icon",
+              "type": "string",
+              "format": "icon",
+              "icon": "sicon-shipping-fast",
+              "label": "أيقونة الميزة",
+              "value": "sicon-shipping-fast",
+              "required": true
+            },
+            {
+              "id": "items.title",
+              "type": "string",
+              "format": "text",
+              "icon": "sicon-format-text-alt",
+              "label": "العنوان",
+              "multilanguage": true,
+              "required": true,
+              "minLength": 1,
+              "maxLength": 60
+            },
+            {
+              "id": "items.text",
+              "type": "string",
+              "format": "textarea",
+              "icon": "sicon-typography",
+              "label": "وصف مختصر",
+              "multilanguage": true,
+              "required": false,
+              "minLength": 0,
+              "maxLength": 150
+            }
           ]
         }
       ]
     },
     {
-      "name": "featured-collection",
-      "title": "تشكيلة مختارة (لمح)",
+      "key": "83087c2c-66a5-42e9-9e29-96cc0a221ebf",
+      "title": {
+        "ar": "تشكيلة مختارة (لمح)",
+        "en": "Featured Collection (Lamh)"
+      },
       "icon": "sicon-shopping-bag",
       "path": "home.featured-collection",
+      "image": "https://raw.githubusercontent.com/authaymeen/theme-lamh/main/src/assets/images/theme-icon.png",
+      "is_default": true,
       "fields": [
-        { "id": "title", "type": "string", "label": "عنوان القسم", "required": true, "value": "تشكيلة مختارة لك" },
-        { "id": "subtitle", "type": "string", "label": "عنوان فرعي", "required": false }
+        {
+          "id": "title",
+          "type": "string",
+          "format": "text",
+          "icon": "sicon-format-text-alt",
+          "label": "عنوان القسم",
+          "multilanguage": true,
+          "required": true,
+          "value": "تشكيلة مختارة لك",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        {
+          "id": "subtitle",
+          "type": "string",
+          "format": "text",
+          "icon": "sicon-typography",
+          "label": "عنوان فرعي",
+          "multilanguage": true,
+          "required": false,
+          "minLength": 0,
+          "maxLength": 150
+        }
       ]
     }
   ]
