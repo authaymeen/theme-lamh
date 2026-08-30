@@ -1,0 +1,42 @@
+{% set banner = component('home.hero-banner') %}
+{% if banner and banner.slides|default([])|length %}
+<section class="hero-banner-section home-section" aria-label="{{ trans('home.hero_banner')|default('العروض الرئيسية') }}">
+    <div class="max-w-container mx-auto px-4">
+        <div class="hero-banner relative rounded-card-xl overflow-hidden">
+            <div class="hero-slider" data-component="hero-slider">
+                {% for slide in banner.slides %}
+                    <div class="hero-slide relative {% if not loop.first %}hidden{% endif %}" data-slide-index="{{ loop.index0 }}">
+                        <img src="{{ slide.image }}" alt="{{ slide.title|default(store.name) }}"
+                             class="w-full h-[340px] sm:h-[440px] lg:h-[520px] object-cover"
+                             loading="{{ loop.first ? 'eager' : 'lazy' }}">
+                        {% if slide.title or slide.subtitle or slide.button_text %}
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/65 via-black/15 to-transparent flex items-end sm:items-center">
+                            <div class="max-w-container mx-auto px-6 sm:px-12 py-10 text-white max-w-xl">
+                                {% if slide.subtitle %}
+                                    <p class="section-eyebrow !text-white !bg-white/15 backdrop-blur-sm">{{ slide.subtitle }}</p>
+                                {% endif %}
+                                {% if slide.title %}<h2 class="hero-slide-title text-3xl sm:text-5xl font-extrabold mb-5">{{ slide.title }}</h2>{% endif %}
+                                {% if slide.button_text and slide.button_link %}
+                                    <a href="{{ slide.button_link }}" class="btn btn-primary inline-flex items-center gap-2 bg-accent hover:bg-accent-dark text-white rounded-card px-7 py-3.5 text-sm font-bold">
+                                        {{ slide.button_text }}
+                                        <i class="sicon-arrow-left rtl:rotate-180" aria-hidden="true"></i>
+                                    </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+
+                {% if banner.slides|length > 1 %}
+                <div class="hero-dots absolute bottom-5 start-1/2 -translate-x-1/2 flex gap-2">
+                    {% for slide in banner.slides %}
+                        <button type="button" class="w-2 h-2 rounded-full bg-white/60" data-slide-dot="{{ loop.index0 }}" aria-label="{{ trans('common.slide')|default('شريحة') }} {{ loop.index }}"></button>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}

@@ -1,0 +1,88 @@
+{# شريط ثقة: مزايا مختصرة تعزّز شعور الاحترافية قبل الفوتر مباشرة #}
+<div class="trust-strip">
+    <div class="max-w-container mx-auto px-4 py-6 grid grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="trust-item flex items-center gap-3">
+            <span class="trust-item-icon w-11 h-11 shrink-0 rounded-card bg-accent-light text-accent flex items-center justify-center"><i class="sicon-shipping-fast" aria-hidden="true"></i></span>
+            <div>
+                <p class="text-sm font-bold text-neutral-900">{{ trans('footer.trust_shipping_title')|default('شحن سريع وآمن') }}</p>
+                <p class="text-xs text-neutral-500">{{ trans('footer.trust_shipping_desc')|default('لجميع مناطق المملكة') }}</p>
+            </div>
+        </div>
+        <div class="trust-item flex items-center gap-3">
+            <span class="trust-item-icon w-11 h-11 shrink-0 rounded-card bg-accent-light text-accent flex items-center justify-center"><i class="sicon-shield-check" aria-hidden="true"></i></span>
+            <div>
+                <p class="text-sm font-bold text-neutral-900">{{ trans('footer.trust_payment_title')|default('دفع آمن 100%') }}</p>
+                <p class="text-xs text-neutral-500">{{ trans('footer.trust_payment_desc')|default('جميع وسائل الدفع المعتمدة') }}</p>
+            </div>
+        </div>
+        <div class="trust-item flex items-center gap-3">
+            <span class="trust-item-icon w-11 h-11 shrink-0 rounded-card bg-accent-light text-accent flex items-center justify-center"><i class="sicon-refresh" aria-hidden="true"></i></span>
+            <div>
+                <p class="text-sm font-bold text-neutral-900">{{ trans('footer.trust_returns_title')|default('إرجاع مجاني') }}</p>
+                <p class="text-xs text-neutral-500">{{ trans('footer.trust_returns_desc')|default('خلال 14 يومًا من الاستلام') }}</p>
+            </div>
+        </div>
+        <div class="trust-item flex items-center gap-3">
+            <span class="trust-item-icon w-11 h-11 shrink-0 rounded-card bg-accent-light text-accent flex items-center justify-center"><i class="sicon-headset" aria-hidden="true"></i></span>
+            <div>
+                <p class="text-sm font-bold text-neutral-900">{{ trans('footer.trust_support_title')|default('دعم متواصل') }}</p>
+                <p class="text-xs text-neutral-500">{{ trans('footer.trust_support_desc')|default('فريقنا جاهز لمساعدتك') }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+{# فوتر رئيسي: عن المتجر، روابط سريعة، خدمة العملاء، النشرة البريدية — داخل بطاقة بيضاء واحدة #}
+<div class="max-w-container mx-auto px-4 pb-12">
+<div class="foot-card grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+
+    <div>
+        {% if store.logo %}
+            <img src="{{ store.logo }}" alt="{{ store.name }}" class="h-8 w-auto mb-4 {% if theme.settings.get('footer_is_dark') %}brightness-0 invert{% endif %}">
+        {% else %}
+            <h3 class="font-bold text-lg mb-4">{{ store.name }}</h3>
+        {% endif %}
+        <p class="text-sm opacity-70 leading-relaxed">{{ store.description|default('')|slice(0, 140) }}</p>
+        {% include 'components/footer/social-links' %}
+    </div>
+
+    <div>
+        <h4 class="font-semibold mb-4">{{ trans('footer.quick_links')|default('روابط سريعة') }}</h4>
+        <ul class="space-y-2.5 text-sm opacity-80">
+            <li><a href="{{ link('/') }}" class="hover:text-accent transition-colors">{{ trans('common.home')|default('الرئيسية') }}</a></li>
+            <li><a href="{{ page('brands') }}" class="hover:text-accent transition-colors">{{ trans('common.brands')|default('الماركات') }}</a></li>
+            <li><a href="{{ page('blog') }}" class="hover:text-accent transition-colors">{{ trans('common.blog')|default('المدونة') }}</a></li>
+            <li><a href="{{ page('order-tracking') }}" class="hover:text-accent transition-colors">{{ trans('pages.track_order')|default('تتبع طلبك') }}</a></li>
+        </ul>
+    </div>
+
+    <div>
+        <h4 class="font-semibold mb-4">{{ trans('footer.customer_service')|default('خدمة العملاء') }}</h4>
+        <ul class="space-y-2.5 text-sm opacity-80">
+            <li><a href="{{ page('page-single', {slug: 'privacy-policy'}) }}" class="hover:text-accent transition-colors">{{ trans('footer.privacy_policy')|default('سياسة الخصوصية') }}</a></li>
+            <li><a href="{{ page('page-single', {slug: 'terms-and-conditions'}) }}" class="hover:text-accent transition-colors">{{ trans('footer.terms')|default('الشروط والأحكام') }}</a></li>
+            <li><a href="mailto:{{ store.email }}" class="hover:text-accent transition-colors">{{ trans('common.contact_us')|default('تواصل معنا') }}</a></li>
+        </ul>
+    </div>
+
+    <div>
+        <h4 class="font-semibold mb-4">{{ trans('footer.newsletter')|default('النشرة البريدية') }}</h4>
+        <p class="text-sm opacity-70 mb-3">{{ trans('footer.newsletter_desc')|default('اشترك ليصلك كل جديد وعروضنا الحصرية') }}</p>
+        <form class="newsletter-form flex" action="#" method="post">
+            <input type="email" required placeholder="{{ trans('footer.email_placeholder')|default('بريدك الإلكتروني') }}"
+                   class="flex-1 rounded-s-pill px-4 py-2.5 text-sm text-neutral-900 focus:outline-none">
+            <button type="submit" class="bg-accent hover:bg-accent-dark transition-colors rounded-e-pill px-4">
+                <i class="sicon-paper-plane text-white" aria-hidden="true"></i>
+            </button>
+        </form>
+
+        {% if store.payment_logos|default([])|length %}
+            <div class="payment-logos flex flex-wrap items-center gap-2 mt-5">
+                {% for logo in store.payment_logos %}
+                    <img src="{{ logo }}" alt="" class="h-5 w-auto" loading="lazy">
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+</div>
+</div>

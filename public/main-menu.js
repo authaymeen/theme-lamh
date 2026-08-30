@@ -1,0 +1,1 @@
+document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll(".main-menu li.group").forEach(function(e){var t=e.querySelector(":scope > a");t&&t.addEventListener("keydown",function(t){if("Enter"===t.key||" "===t.key){var n=e.querySelector(".mega-menu");n&&(t.preventDefault(),n.classList.toggle("!visible"),n.classList.toggle("!opacity-100"))}})})});

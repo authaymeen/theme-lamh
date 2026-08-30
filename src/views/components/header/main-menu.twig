@@ -1,0 +1,38 @@
+{# القائمة الرئيسية للتصنيفات/الروابط — تُبنى من قوائم المتجر المُعرّفة في لوحة تحكم سلة #}
+<nav class="main-menu hidden lg:block border-b border-neutral-100">
+    <div class="max-w-container mx-auto px-4 py-3">
+        <ul class="menu-pill inline-flex items-center gap-1">
+            {% for item in menus.main|default([]) %}
+                <li class="relative group">
+                    <a href="{{ item.url }}"
+                       class="menu-pill-link flex items-center gap-1 text-sm font-semibold px-4 py-2.5 {% if is_current_url(item.url) %}is-active{% endif %}">
+                        {{ item.title }}
+                        {% if item.children|default([])|length %}
+                            <i class="sicon-chevron-down text-xs" aria-hidden="true"></i>
+                        {% endif %}
+                    </a>
+                    {% if item.children|default([])|length %}
+                        <ul class="mega-menu invisible opacity-0 group-hover:visible group-hover:opacity-100 absolute top-full start-0 min-w-[220px] bg-white shadow-card py-2 mt-2 transition-all z-30">
+                            {% for child in item.children %}
+                                <li><a href="{{ child.url }}" class="block px-4 py-2 text-sm text-neutral-600 hover:bg-accent-light hover:text-accent">{{ child.title }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</nav>
+
+<div id="mobile-menu" class="mobile-menu lg:hidden" hidden>
+    <ul class="divide-y divide-neutral-100">
+        {% for item in menus.main|default([]) %}
+            <li>
+                <a href="{{ item.url }}" class="flex items-center justify-between px-4 py-3 text-neutral-700">
+                    {{ item.title }}
+                    {% if item.children|default([])|length %}<i class="sicon-chevron-left text-xs" aria-hidden="true"></i>{% endif %}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>

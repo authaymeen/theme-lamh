@@ -1,0 +1,107 @@
+{% extends 'layouts/master' %}
+
+{% block title %}{{ product.name }}{% endblock %}
+{% block description %}{{ product.short_description|default(product.name) }}{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{{ 'fslightbox.css'|cdn }}">
+{% endblock %}
+
+{% block content %}
+    {% if theme.settings.get('show_breadcrumb') %}
+        {% include 'components/header/breadcrumb' with {items: breadcrumbs|default([])} %}
+    {% endif %}
+
+    <div class="max-w-container mx-auto px-4 py-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+
+            {% include 'components/product/gallery' %}
+
+            <div class="product-info">
+                {% if product.brand %}
+                    <a href="{{ product.brand.url }}" class="inline-flex items-center gap-2 mb-3">
+                        {% if product.brand.logo %}<img src="{{ product.brand.logo }}" alt="{{ product.brand.name }}" class="h-6 w-auto">{% endif %}
+                        <span class="text-sm text-neutral-500">{{ product.brand.name }}</span>
+                    </a>
+                {% endif %}
+
+                <h1 class="text-2xl sm:text-3xl font-bold text-neutral-900 mb-2">{{ product.name }}</h1>
+
+                {% if theme.settings.get('show_ratings') and product.rating|default(0) > 0 %}
+                    <div class="flex items-center gap-2 mb-4">
+                        <salla-rating rating="{{ product.rating }}" read-only></salla-rating>
+                        <a href="#reviews" class="text-xs text-neutral-500 hover:text-accent">
+                            ({{ product.rating_count|default(0) }} {{ trans('product.reviews')|default('تقييم') }})
+                        </a>
+                    </div>
+                {% endif %}
+
+                {% include 'components/product/price' %}
+
+                {% if product.description %}
+                    <div class="product-description text-sm text-neutral-600 leading-relaxed mt-5 line-clamp-4" data-component="read-more">
+                        {{ product.description|raw }}
+                    </div>
+                {% endif %}
+
+                {% if product.tags|default([])|length %}
+                    <div class="flex flex-wrap gap-2 mt-5">
+                        {% for tag in product.tags %}
+                            <a href="{{ tag.url }}" class="text-xs bg-neutral-100 hover:bg-accent-light hover:text-accent transition-colors rounded-pill px-3 py-1.5 text-neutral-600">#{{ tag.name }}</a>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                <div class="border-t border-neutral-100 mt-6 pt-6">
+                    {% if product.options|default([])|length %}
+                        {% include 'components/product/options' with {options: product.options} %}
+                    {% endif %}
+
+                    {% include 'components/product/add-to-cart' %}
+                </div>
+
+                {% if product.sku %}
+                    <p class="text-xs text-neutral-400 mt-4">{{ trans('product.sku')|default('رمز المنتج') }}: {{ product.sku }}</p>
+                {% endif %}
+            </div>
+        </div>
+
+        {% if product.description %}
+        <section class="mt-14 max-w-3xl">
+            <h2 class="text-lg font-bold text-neutral-900 mb-4">{{ trans('product.full_description')|default('تفاصيل المنتج') }}</h2>
+            <div class="prose prose-neutral max-w-none text-sm leading-relaxed text-neutral-600">{{ product.description|raw }}</div>
+        </section>
+        {% endif %}
+
+        <section id="reviews" class="mt-14">
+            {% include 'components/comments' with {comments: product.comments|default([]), rating: product.rating|default(0)} %}
+        </section>
+
+        {% if related_products|default([])|length %}
+        <section class="mt-16">
+            <p class="section-eyebrow">{{ trans('product.similar_eyebrow')|default('قد يعجبك أيضًا') }}</p>
+            <h2 class="section-heading text-neutral-900 mb-6">{{ trans('product.similar_products')|default('منتجات مشابهة') }}</h2>
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+                {% for product in related_products|slice(0, 4) %}
+                    {% include 'pages/partials/product/card' with {product: product} %}
+                {% endfor %}
+            </div>
+        </section>
+        {% endif %}
+    </div>
+
+    {# شريط سفلي ثابت للجوال لإضافة المنتج للسلة بسرعة #}
+    <div class="mobile-add-to-cart-bar lg:hidden fixed bottom-0 inset-x-0 bg-white border-t border-neutral-100 p-3 flex items-center gap-3 z-40">
+        <div class="flex-1">
+            {% include 'components/product/price' with {compact: true} %}
+        </div>
+        <button type="button" class="add-to-cart-btn flex-1 bg-accent hover:bg-accent-dark text-white rounded-card py-3 text-sm font-bold" data-product-id="{{ product.id }}">
+            {{ trans('common.add_to_cart')|default('أضف للسلة') }}
+        </button>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script src="{{ 'fslightbox.js'|cdn }}" defer></script>
+    <script src="{{ 'product.js'|asset }}" defer></script>
+{% endblock %}

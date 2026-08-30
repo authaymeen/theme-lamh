@@ -1,0 +1,120 @@
+// إيقاع مسافات موحّد بين كل أقسام الصفحة الرئيسية — إحساس محرَّر باحترافية بدل التصاق الأقسام
+.home-section {
+    padding-block: clamp(2rem, 1.5rem + 2.5vw, 4rem);
+
+    &.is-alt { background: var(--color-surface-alt); }
+}
+
+// بانر رئيسي — بطاقة كبيرة مدوّرة الحواف (نصف القطر يُضبط عبر class="rounded-card-xl" في الـ twig)
+.hero-banner {
+    isolation: isolate;
+
+    img { transition: transform 0.6s var(--ease-out); }
+    &:hover img { transform: scale(1.02); }
+}
+
+.hero-slider {
+    position: relative;
+
+    .hero-slide {
+        transition: opacity var(--dur-slow) var(--ease-out);
+    }
+
+    .hero-slide-title {
+        text-shadow: 0 2px 16px rgba(0, 0, 0, 0.25);
+    }
+}
+
+.hero-dots button {
+    transition: background-color var(--dur-fast) var(--ease-out), width var(--dur-fast) var(--ease-out);
+
+    &[data-active] {
+        background: #fff;
+        width: 1.5rem;
+        border-radius: 999px;
+    }
+}
+
+// شبكة تصنيفات — bento غير متماثل
+.category-card {
+    box-shadow: var(--shadow-xs);
+    transition: box-shadow var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out);
+
+    img { will-change: transform; }
+
+    &:hover {
+        box-shadow: var(--shadow-md);
+        transform: translateY(-3px);
+    }
+}
+
+.category-label {
+    box-shadow: var(--shadow-xs);
+}
+
+// مزايا المتجر
+.value-prop-icon {
+    transition: transform var(--dur-base) var(--ease-out);
+}
+
+.value-prop-item {
+    transition: box-shadow var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out);
+
+    &:hover {
+        box-shadow: var(--shadow-sm);
+        transform: translateY(-2px);
+
+        .value-prop-icon { transform: scale(1.08); }
+    }
+}
+
+// بانر ترويجي عريض (نصف القطر عبر rounded-card-xl في الـ twig)
+.promo-banner {
+    position: relative;
+    isolation: isolate;
+
+    img {
+        transition: transform 0.6s var(--ease-out);
+    }
+
+    &:hover img {
+        transform: scale(1.03);
+    }
+
+    .promo-banner-overlay {
+        background: linear-gradient(90deg, rgba(20, 23, 26, 0.72) 0%, rgba(20, 23, 26, 0.35) 55%, rgba(20, 23, 26, 0) 100%);
+
+        [dir='rtl'] & {
+            background: linear-gradient(270deg, rgba(20, 23, 26, 0.72) 0%, rgba(20, 23, 26, 0.35) 55%, rgba(20, 23, 26, 0) 100%);
+        }
+    }
+}
+
+// بانر مزدوج (نصف القطر عبر rounded-card-lg في الـ twig)
+.split-banner {
+    position: relative;
+    isolation: isolate;
+
+    img {
+        transition: transform 0.6s var(--ease-out);
+    }
+
+    &:hover img {
+        transform: scale(1.04);
+    }
+
+    .split-banner-overlay {
+        background: linear-gradient(to top, rgba(20, 23, 26, 0.35) 0%, rgba(20, 23, 26, 0) 45%);
+    }
+
+    .split-banner-card {
+        box-shadow: var(--shadow-sm);
+    }
+}
+
+// تشكيلة مختارة — زر "عرض الكل" كأيقونة دائرية بدل رابط نصي
+.featured-collection .view-all-link {
+    i { transition: transform var(--dur-fast) var(--ease-out); }
+    &:hover i { transform: translateX(-3px); }
+    [dir='rtl'] &:hover i { transform: translateX(3px); }
+}

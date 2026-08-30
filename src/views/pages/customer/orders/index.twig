@@ -1,0 +1,41 @@
+{% extends 'layouts/master' %}
+
+{% block title %}{{ trans('customer.my_orders')|default('طلباتي') }}{% endblock %}
+
+{% block content %}
+<div class="max-w-container mx-auto px-4 py-10">
+    <div class="grid grid-cols-1 lg:grid-cols-[240px_1fr] gap-8">
+        {% include 'pages/customer/partials/sidebar' with {active: 'orders'} %}
+
+        <div>
+            <h1 class="text-xl font-bold text-neutral-900 mb-6">{{ trans('customer.my_orders')|default('طلباتي') }}</h1>
+
+            {% if orders|default([])|length %}
+                <div class="space-y-4">
+                    {% for order in orders %}
+                        <a href="{{ page('customer.orders.single', {id: order.id}) }}"
+                           class="order-row flex items-center justify-between gap-4 border border-neutral-100 rounded-card p-5 hover:border-accent transition-colors">
+                            <div>
+                                <p class="font-semibold text-sm text-neutral-900">{{ trans('order.order_number')|default('طلب') }} #{{ order.id }}</p>
+                                <p class="text-xs text-neutral-400 mt-1">{{ order.date|date }}</p>
+                            </div>
+                            <span class="order-status text-xs font-medium px-3 py-1.5 rounded-pill bg-accent-light text-accent">{{ order.status }}</span>
+                            <span class="font-bold text-sm text-neutral-900">{{ order.total|currency }}</span>
+                            <i class="sicon-chevron-left rtl:rotate-180 text-neutral-300" aria-hidden="true"></i>
+                        </a>
+                    {% endfor %}
+                </div>
+                {% if pagination is defined %}
+                    <div class="mt-8 flex justify-center">{{ pagination }}</div>
+                {% endif %}
+            {% else %}
+                {% include 'pages/partials/empty-state' with {icon: 'sicon-box', title: trans('customer.no_orders')|default('لا توجد طلبات سابقة')} %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+    <script src="{{ 'order.js'|asset }}" defer></script>
+{% endblock %}

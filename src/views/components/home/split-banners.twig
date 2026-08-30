@@ -1,0 +1,31 @@
+{#
+  بانرين جنبًا إلى جنب — لعرض تشكيلتين/فئتين/عرضين في آن واحد
+  props (من twilight.json): banners (collection من 2): banners.image, banners.title, banners.button_text, banners.link
+#}
+{% set split = component('home.split-banners') %}
+{% if split and split.banners|default([])|length >= 2 %}
+<section class="split-banners-section home-section is-alt" aria-label="{{ trans('home.split_banners')|default('عروض مختارة') }}">
+    <div class="max-w-container mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+        {% for banner in split.banners|slice(0, 2) %}
+            <a href="{{ banner.link|default('#') }}" class="split-banner block relative h-[260px] sm:h-[340px] rounded-card-lg overflow-hidden">
+                <img src="{{ banner.image }}" alt="{{ banner.title|default(store.name) }}" loading="lazy"
+                     class="w-full h-full object-cover">
+
+                {% if banner.title or banner.button_text %}
+                <div class="split-banner-overlay absolute inset-0 flex items-end p-4 sm:p-5">
+                    <div class="split-banner-card bg-white/90 backdrop-blur-sm rounded-card px-5 py-4">
+                        {% if banner.title %}<h3 class="text-base sm:text-lg font-extrabold text-neutral-900">{{ banner.title }}</h3>{% endif %}
+                        {% if banner.button_text %}
+                            <span class="inline-flex items-center gap-1.5 mt-1 text-sm font-semibold text-accent-dark">
+                                {{ banner.button_text }}
+                                <i class="sicon-arrow-left rtl:rotate-180" aria-hidden="true"></i>
+                            </span>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endif %}
+            </a>
+        {% endfor %}
+    </div>
+</section>
+{% endif %}
