@@ -10,7 +10,7 @@
              class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
 
         {% if product.sale_price and product.sale_price < product.price %}
-            <span class="absolute top-3 start-3 bg-accent text-white text-xs font-semibold px-2.5 py-1 rounded-pill">
+            <span class="product-badge absolute top-3 start-3 bg-accent text-white text-xs font-semibold px-2.5 py-1 rounded-pill shadow-sm">
                 {{ trans('product.discount')|default('خصم') }}
                 {{ (((product.price - product.sale_price) / product.price) * 100)|round }}%
             </span>
@@ -49,7 +49,7 @@
             </div>
 
             {% if theme.settings.get('show_quick_add') and product.status == 'sale' %}
-                <button type="button" class="quick-add-btn w-9 h-9 rounded-full bg-accent-light text-accent hover:bg-accent hover:text-white transition-colors flex items-center justify-center"
+                <button type="button" class="quick-add-btn w-9 h-9 rounded-sm bg-accent-light text-accent hover:bg-accent hover:text-white transition-colors flex items-center justify-center"
                         data-product-id="{{ product.id }}" aria-label="{{ trans('common.add_to_cart')|default('أضف للسلة') }}">
                     <i class="sicon-shopping-bag-add" aria-hidden="true"></i>
                 </button>

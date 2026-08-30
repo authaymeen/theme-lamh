@@ -25,7 +25,7 @@
                 </div>
             {% elseif option.type == 'text' %}
                 <input type="text" name="options[{{ option.id }}]" placeholder="{{ option.placeholder|default('') }}"
-                       class="w-full rounded-lg border-neutral-200 focus:border-accent focus:ring-accent text-sm">
+                       class="w-full rounded-card border-neutral-200 focus:border-accent focus:ring-accent text-sm">
             {% else %}
                 <div class="flex flex-wrap gap-2">
                     {% for value in option.values %}

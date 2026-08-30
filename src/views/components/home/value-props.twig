@@ -1,14 +1,14 @@
 {% set props = component('home.value-props') %}
 {% if props and props.items|default([])|length %}
-<section class="value-props border-b border-neutral-100" aria-label="{{ trans('home.value_props')|default('مزايا المتجر') }}">
-    <div class="max-w-container mx-auto px-4 py-8 grid grid-cols-2 sm:grid-cols-4 gap-6">
+<section class="value-props" aria-label="{{ trans('home.value_props')|default('مزايا المتجر') }}">
+    <div class="max-w-container mx-auto px-4 py-8 grid grid-cols-2 sm:grid-cols-4 gap-4">
         {% for item in props.items %}
-            <div class="flex flex-col sm:flex-row items-center sm:items-start gap-3 text-center sm:text-start">
-                <span class="w-11 h-11 shrink-0 rounded-full bg-accent-light text-accent flex items-center justify-center">
+            <div class="value-prop-item bg-white rounded-card shadow-card flex items-center gap-3 p-4">
+                <span class="value-prop-icon w-11 h-11 shrink-0 rounded-card bg-accent-light text-accent flex items-center justify-center">
                     <i class="{{ item.icon|default('sicon-badge-check') }} text-xl" aria-hidden="true"></i>
                 </span>
                 <div>
-                    <h3 class="text-sm font-semibold text-neutral-900">{{ item.title }}</h3>
+                    <h3 class="text-sm font-bold text-neutral-900">{{ item.title }}</h3>
                     {% if item.text %}<p class="text-xs text-neutral-500 mt-0.5">{{ item.text }}</p>{% endif %}
                 </div>
             </div>

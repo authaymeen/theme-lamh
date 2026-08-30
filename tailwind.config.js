@@ -28,11 +28,14 @@ module.exports = {
         },
       },
       fontFamily: {
-        sans: ['var(--font-family, "IBM Plex Sans Arabic")', 'Tajawal', 'sans-serif'],
+        sans: ['var(--font-main, "Tajawal")', 'Tajawal', 'system-ui', 'sans-serif'],
       },
       borderRadius: {
-        card: '14px',
-        pill: '999px',
+        sm: 'var(--radius-sm, 12px)',
+        card: 'var(--radius-card, 16px)',
+        'card-lg': 'var(--radius-card-lg, 22px)',
+        'card-xl': 'var(--radius-card-xl, 28px)',
+        pill: 'var(--radius-pill, 999px)',
       },
       boxShadow: {
         card: '0 1px 2px rgba(24,24,27,0.04), 0 8px 24px -12px rgba(24,24,27,0.10)',

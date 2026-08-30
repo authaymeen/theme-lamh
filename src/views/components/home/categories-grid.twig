@@ -1,22 +1,41 @@
 {% set grid = component('home.categories-grid') %}
-{% if grid and grid.categories|default([])|length %}
-<section class="categories-grid" aria-label="{{ grid.title|default('التصنيفات') }}">
-    <div class="max-w-container mx-auto px-4 py-12">
+{% set count = grid.categories|default([])|length %}
+{% if grid and count %}
+<section class="categories-grid home-section" aria-label="{{ grid.title|default('التصنيفات') }}">
+    <div class="max-w-container mx-auto px-4">
         {% if grid.title %}
-            <div class="flex items-end justify-between mb-6">
-                <h2 class="text-xl sm:text-2xl font-bold text-neutral-900">{{ grid.title }}</h2>
+            <div class="text-center mb-10">
+                <p class="section-eyebrow">{{ trans('home.categories_eyebrow')|default('تصفّح مجموعاتنا') }}</p>
+                <h2 class="section-heading text-neutral-900">{{ grid.title }}</h2>
             </div>
         {% endif %}
-        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-{{ grid.categories|length > 6 ? '4' : grid.categories|length }} gap-4">
-            {% for cat in grid.categories %}
-                <a href="{{ cat.link }}" class="category-card group relative block rounded-card overflow-hidden aspect-square bg-neutral-100">
-                    <img src="{{ cat.image }}" alt="{{ cat.title }}" loading="lazy"
-                         class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
-                    <span class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></span>
-                    <span class="absolute bottom-4 start-4 text-white font-semibold">{{ cat.title }}</span>
-                </a>
-            {% endfor %}
-        </div>
+
+        {% if count >= 5 %}
+            {# تخطيط bento غير متماثل: أول تصنيف يظهر ببطاقة كبيرة، والبقية يملأ الفراغات تلقائيًا #}
+            <div class="bento-grid grid grid-cols-2 sm:grid-cols-4 gap-4" style="grid-auto-flow:dense; grid-auto-rows:150px;">
+                {% for cat in grid.categories %}
+                    <a href="{{ cat.link }}" class="category-card group relative block rounded-card-lg overflow-hidden bg-neutral-100{% if loop.first %} col-span-2 row-span-2{% endif %}">
+                        <img src="{{ cat.image }}" alt="{{ cat.title }}" loading="lazy"
+                             class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                        <span class="category-label absolute bottom-3 start-3 end-3{% if loop.first %} sm:end-auto sm:max-w-[75%]{% endif %} bg-white/90 backdrop-blur-sm rounded-card px-3.5 py-2 text-sm font-bold text-neutral-900 truncate">
+                            {{ cat.title }}
+                        </span>
+                    </a>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-{{ count > 6 ? '4' : count }} gap-4">
+                {% for cat in grid.categories %}
+                    <a href="{{ cat.link }}" class="category-card group relative block rounded-card-lg overflow-hidden aspect-square bg-neutral-100">
+                        <img src="{{ cat.image }}" alt="{{ cat.title }}" loading="lazy"
+                             class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                        <span class="category-label absolute bottom-3 start-3 end-3 bg-white/90 backdrop-blur-sm rounded-card px-3.5 py-2 text-sm font-bold text-neutral-900 truncate">
+                            {{ cat.title }}
+                        </span>
+                    </a>
+                {% endfor %}
+            </div>
+        {% endif %}
     </div>
 </section>
 {% endif %}

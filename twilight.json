@@ -54,8 +54,8 @@
       "label": "فوتر داكن",
       "format": "switch",
       "required": false,
-      "value": true,
-      "selected": true
+      "value": false,
+      "selected": false
     },
     {
       "type": "boolean",
@@ -345,6 +345,151 @@
           "required": false,
           "minLength": 0,
           "maxLength": 150
+        }
+      ]
+    },
+    {
+      "key": "6cac233b-b0f2-4a65-86bd-3f5c6e9ab728",
+      "title": {
+        "ar": "بانر ترويجي عريض (لمح)",
+        "en": "Wide Promo Banner (Lamh)"
+      },
+      "icon": "sicon-image",
+      "path": "home.promo-banner",
+      "image": "https://raw.githubusercontent.com/authaymeen/theme-lamh/main/src/assets/images/theme-icon.png",
+      "is_default": true,
+      "fields": [
+        {
+          "id": "image",
+          "type": "string",
+          "format": "image",
+          "icon": "sicon-image",
+          "label": "صورة البانر",
+          "description": "المقاس المناسب للصورة هو 1920×700 بكسل",
+          "required": true
+        },
+        {
+          "id": "eyebrow",
+          "type": "string",
+          "format": "text",
+          "icon": "sicon-typography",
+          "label": "عنوان صغير علوي",
+          "multilanguage": true,
+          "required": false,
+          "minLength": 0,
+          "maxLength": 60
+        },
+        {
+          "id": "title",
+          "type": "string",
+          "format": "text",
+          "icon": "sicon-format-text-alt",
+          "label": "العنوان",
+          "multilanguage": true,
+          "required": false,
+          "minLength": 0,
+          "maxLength": 100
+        },
+        {
+          "id": "button_text",
+          "type": "string",
+          "format": "text",
+          "icon": "sicon-format-text-alt",
+          "label": "نص الزر",
+          "multilanguage": true,
+          "required": false,
+          "minLength": 0,
+          "maxLength": 40
+        },
+        {
+          "id": "link",
+          "type": "items",
+          "format": "variable-list",
+          "icon": "sicon-link",
+          "label": "رابط البانر",
+          "required": false,
+          "searchable": true,
+          "source": "custom",
+          "sources": [
+            { "label": "منتج", "key": "products", "value": "products" },
+            { "label": "تصنيف", "key": "categories", "value": "categories" },
+            { "label": "ماركة تجارية", "key": "brands", "value": "brands" },
+            { "label": "صفحة تعريفية", "key": "pages", "value": "pages" },
+            { "label": "التخفيضات", "key": "offers_link", "value": "offers_link" },
+            { "label": "رابط خارجي", "key": "custom", "value": "custom" }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "6caceb8c-519e-4ba0-9df4-1f5e50e59aa9",
+      "title": {
+        "ar": "بانرين متجاورين (لمح)",
+        "en": "Split Banners (Lamh)"
+      },
+      "icon": "sicon-grid",
+      "path": "home.split-banners",
+      "image": "https://raw.githubusercontent.com/authaymeen/theme-lamh/main/src/assets/images/theme-icon.png",
+      "is_default": false,
+      "fields": [
+        {
+          "id": "banners",
+          "type": "collection",
+          "format": "collection",
+          "label": "البانرات",
+          "item_label": "بانر",
+          "required": true,
+          "minLength": 2,
+          "maxLength": 2,
+          "fields": [
+            {
+              "id": "banners.image",
+              "type": "string",
+              "format": "image",
+              "icon": "sicon-image",
+              "label": "صورة البانر",
+              "description": "المقاس المناسب للصورة هو 800×700 بكسل",
+              "required": true
+            },
+            {
+              "id": "banners.title",
+              "type": "string",
+              "format": "text",
+              "icon": "sicon-format-text-alt",
+              "label": "العنوان",
+              "multilanguage": true,
+              "required": false,
+              "minLength": 0,
+              "maxLength": 60
+            },
+            {
+              "id": "banners.button_text",
+              "type": "string",
+              "format": "text",
+              "icon": "sicon-format-text-alt",
+              "label": "نص الزر",
+              "multilanguage": true,
+              "required": false,
+              "minLength": 0,
+              "maxLength": 40
+            },
+            {
+              "id": "banners.link",
+              "type": "items",
+              "format": "variable-list",
+              "icon": "sicon-link",
+              "label": "رابط البانر",
+              "required": false,
+              "searchable": true,
+              "source": "custom",
+              "sources": [
+                { "label": "منتج", "key": "products", "value": "products" },
+                { "label": "تصنيف", "key": "categories", "value": "categories" },
+                { "label": "ماركة تجارية", "key": "brands", "value": "brands" },
+                { "label": "رابط خارجي", "key": "custom", "value": "custom" }
+              ]
+            }
+          ]
         }
       ]
     }

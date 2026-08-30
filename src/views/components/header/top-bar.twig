@@ -1,22 +1,29 @@
 {#
-  شريط علوي ثانوي: روابط سريعة (تتبع الطلب، تواصل معنا) + اختيار اللغة/العملة إن كان المتجر متعدد اللغات.
+  شريط علوي ثانوي: رسالة ثقة قصيرة + روابط سريعة + اختيار اللغة/العملة إن كان المتجر متعدد اللغات.
 #}
 <div class="top-bar hidden md:block border-b border-neutral-100 text-sm">
     <div class="max-w-container mx-auto px-4 flex items-center justify-between h-10">
-        <ul class="flex items-center gap-5 text-neutral-500">
-            <li><a href="{{ page('order-tracking') }}" class="hover:text-accent transition-colors">{{ trans('pages.track_order')|default('تتبع طلبك') }}</a></li>
-            <li><a href="{{ page('page-single', {slug: 'about-us'}) }}" class="hover:text-accent transition-colors">{{ trans('pages.about_us')|default('من نحن') }}</a></li>
-        </ul>
+        <p class="flex items-center gap-2 text-neutral-500">
+            <i class="sicon-shipping-fast text-accent" aria-hidden="true"></i>
+            {{ trans('home.free_shipping_note')|default('شحن سريع لجميع مناطق المملكة') }}
+        </p>
 
-        {% if store.languages|default([])|length > 1 or store.currencies|default([])|length > 1 %}
-        <div class="flex items-center gap-4 text-neutral-500">
-            {% if store.languages|default([])|length > 1 %}
-                <salla-language-selector></salla-language-selector>
-            {% endif %}
-            {% if store.currencies|default([])|length > 1 %}
-                <salla-currency-selector></salla-currency-selector>
+        <div class="flex items-center gap-5 text-neutral-500">
+            <ul class="flex items-center gap-5">
+                <li><a href="{{ page('order-tracking') }}" class="hover:text-accent transition-colors">{{ trans('pages.track_order')|default('تتبع طلبك') }}</a></li>
+                <li><a href="{{ page('page-single', {slug: 'about-us'}) }}" class="hover:text-accent transition-colors">{{ trans('pages.about_us')|default('من نحن') }}</a></li>
+            </ul>
+
+            {% if store.languages|default([])|length > 1 or store.currencies|default([])|length > 1 %}
+            <div class="flex items-center gap-4 border-s border-neutral-200 ps-4">
+                {% if store.languages|default([])|length > 1 %}
+                    <salla-language-selector></salla-language-selector>
+                {% endif %}
+                {% if store.currencies|default([])|length > 1 %}
+                    <salla-currency-selector></salla-currency-selector>
+                {% endif %}
+            </div>
             {% endif %}
         </div>
-        {% endif %}
     </div>
 </div>

@@ -1,13 +1,13 @@
 {# زر الإضافة للسلة + الكمية — يستخدم واجهة سلة JS SDK من المتصفح (window.salla.cart.addItem) #}
 <div class="add-to-cart-row hidden lg:flex items-center gap-3">
     {% if product.status == 'sale' %}
-        <div class="quantity-input flex items-center border border-neutral-200 rounded-pill overflow-hidden">
+        <div class="quantity-input flex items-center border border-neutral-200 rounded-card overflow-hidden">
             <button type="button" class="w-10 h-11 flex items-center justify-center text-neutral-500 hover:text-accent" data-action="decrease">−</button>
             <input type="number" min="1" value="1" class="w-12 text-center border-0 focus:ring-0 text-sm" data-quantity-input>
             <button type="button" class="w-10 h-11 flex items-center justify-center text-neutral-500 hover:text-accent" data-action="increase">+</button>
         </div>
 
-        <button type="button" class="add-to-cart-btn flex-1 bg-accent hover:bg-accent-dark text-white rounded-pill py-3.5 text-sm font-semibold transition-colors"
+        <button type="button" class="add-to-cart-btn flex-1 bg-accent hover:bg-accent-dark text-white rounded-card py-3.5 text-sm font-bold transition-colors"
                 data-product-id="{{ product.id }}">
             <i class="sicon-shopping-bag-add" aria-hidden="true"></i>
             {{ trans('common.add_to_cart')|default('أضف للسلة') }}
@@ -18,7 +18,7 @@
             <i class="sicon-heart" aria-hidden="true"></i>
         </button>
     {% else %}
-        <button type="button" class="flex-1 bg-neutral-100 text-neutral-400 rounded-pill py-3.5 text-sm font-semibold cursor-not-allowed" disabled>
+        <button type="button" class="flex-1 bg-neutral-100 text-neutral-400 rounded-card py-3.5 text-sm font-bold cursor-not-allowed" disabled>
             {{ trans('product.out_of_stock')|default('نفدت الكمية') }}
         </button>
         <salla-notify-availability product-id="{{ product.id }}"></salla-notify-availability>

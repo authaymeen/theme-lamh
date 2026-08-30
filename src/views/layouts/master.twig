@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 {#
   لمح (Lamh) — Master Layout
-  ألوان الهوية (أخضر زمردي) والخط ثابتة في src/assets/styles/base/_tokens.scss كمتغيرات CSS —
-  وليست إعدادات عبر بوابة الشركاء (تبسيطًا وتفاديًا لصيغ twilight.json غير الموثّقة رسميًا).
+  لون الهوية (أخضر زمردي) ثابت في src/assets/styles/base/_tokens.scss كمتغيّر CSS — وليس
+  إعدادًا عبر بوابة الشركاء (تبسيطًا وتفاديًا لصيغ twilight.json غير الموثّقة رسميًا).
+  الخط يتبع إعداد "خط المتجر" الذي يختاره التاجر من إعدادات سلة (theme.font) — وفق نفس آلية
+  الثيم المرجعي الرسمي لسلة (theme-raed)، بدل فرض خط واحد على كل المتاجر. القيمة الافتراضية
+  عند غياب theme.font (بيئة تطوير محلية) هي Tajawal.
   يوفر الملف hooks القياسية + blocks القياسية (styles/head/content/script) التي تمتدّ منها كل
   صفحات src/views/pages/*.
 #}
@@ -19,10 +22,18 @@
     <link rel="icon" href="{{ store.avatar|default(asset('images/theme-icon.svg')) }}">
     <link rel="canonical" href="{{ current_url|default('') }}">
 
-    {# خطوط + أيقونات سلة #}
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="stylesheet" href="{{ 'font-name'|cdn }}">
+    {# خط المتجر الذي يختاره التاجر من إعدادات سلة (Dubai / Estedad / DIN Next LT Arabic / ...) +
+       أيقونات سلة — نفس آلية تحميل الخط في الثيم المرجعي الرسمي (theme-raed) #}
+    {% if theme.font.path is defined and theme.font.path %}
+        <link rel="stylesheet" href="{{ theme.font.path|cdn }}">
+    {% endif %}
     <link rel="stylesheet" href="{{ 'sallaicons.css'|cdn }}">
+
+    <style>
+        :root {
+            --font-main: '{{ theme.font.name|default('Tajawal') }}';
+        }
+    </style>
 
     {% hook 'head' %}
 

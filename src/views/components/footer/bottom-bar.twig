@@ -1,6 +1,6 @@
-{# شريط سفلي: حقوق النشر + طرق الدفع #}
-<div class="bottom-bar border-t border-white/10">
-    <div class="max-w-container mx-auto px-4 py-5 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs opacity-70">
+{# شريط سفلي: حقوق النشر #}
+<div class="bottom-bar border-t border-neutral-200">
+    <div class="max-w-container mx-auto px-4 py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs opacity-70">
         <p>&copy; {{ "now"|date('Y') }} {{ store.name }}. {{ trans('footer.rights_reserved')|default('جميع الحقوق محفوظة') }}.</p>
         <p class="flex items-center gap-1.5">
             {{ trans('footer.powered_by')|default('صُنع بواسطة') }}
@@ -8,12 +8,5 @@
             —
             <span>ثيم لمح</span>
         </p>
-        {% if store.payment_logos|default([])|length %}
-            <div class="flex items-center gap-2">
-                {% for logo in store.payment_logos %}
-                    <img src="{{ logo }}" alt="" class="h-5 w-auto opacity-90" loading="lazy">
-                {% endfor %}
-            </div>
-        {% endif %}
     </div>
 </div>

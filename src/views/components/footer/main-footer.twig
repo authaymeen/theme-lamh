@@ -1,5 +1,40 @@
-{# فوتر رئيسي: عن المتجر، روابط سريعة، خدمة العملاء، النشرة البريدية #}
-<div class="max-w-container mx-auto px-4 py-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+{# شريط ثقة: مزايا مختصرة تعزّز شعور الاحترافية قبل الفوتر مباشرة #}
+<div class="trust-strip">
+    <div class="max-w-container mx-auto px-4 py-6 grid grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="trust-item flex items-center gap-3">
+            <span class="trust-item-icon w-11 h-11 shrink-0 rounded-card bg-accent-light text-accent flex items-center justify-center"><i class="sicon-shipping-fast" aria-hidden="true"></i></span>
+            <div>
+                <p class="text-sm font-bold text-neutral-900">{{ trans('footer.trust_shipping_title')|default('شحن سريع وآمن') }}</p>
+                <p class="text-xs text-neutral-500">{{ trans('footer.trust_shipping_desc')|default('لجميع مناطق المملكة') }}</p>
+            </div>
+        </div>
+        <div class="trust-item flex items-center gap-3">
+            <span class="trust-item-icon w-11 h-11 shrink-0 rounded-card bg-accent-light text-accent flex items-center justify-center"><i class="sicon-shield-check" aria-hidden="true"></i></span>
+            <div>
+                <p class="text-sm font-bold text-neutral-900">{{ trans('footer.trust_payment_title')|default('دفع آمن 100%') }}</p>
+                <p class="text-xs text-neutral-500">{{ trans('footer.trust_payment_desc')|default('جميع وسائل الدفع المعتمدة') }}</p>
+            </div>
+        </div>
+        <div class="trust-item flex items-center gap-3">
+            <span class="trust-item-icon w-11 h-11 shrink-0 rounded-card bg-accent-light text-accent flex items-center justify-center"><i class="sicon-refresh" aria-hidden="true"></i></span>
+            <div>
+                <p class="text-sm font-bold text-neutral-900">{{ trans('footer.trust_returns_title')|default('إرجاع مجاني') }}</p>
+                <p class="text-xs text-neutral-500">{{ trans('footer.trust_returns_desc')|default('خلال 14 يومًا من الاستلام') }}</p>
+            </div>
+        </div>
+        <div class="trust-item flex items-center gap-3">
+            <span class="trust-item-icon w-11 h-11 shrink-0 rounded-card bg-accent-light text-accent flex items-center justify-center"><i class="sicon-headset" aria-hidden="true"></i></span>
+            <div>
+                <p class="text-sm font-bold text-neutral-900">{{ trans('footer.trust_support_title')|default('دعم متواصل') }}</p>
+                <p class="text-xs text-neutral-500">{{ trans('footer.trust_support_desc')|default('فريقنا جاهز لمساعدتك') }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+{# فوتر رئيسي: عن المتجر، روابط سريعة، خدمة العملاء، النشرة البريدية — داخل بطاقة بيضاء واحدة #}
+<div class="max-w-container mx-auto px-4 pb-12">
+<div class="foot-card grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
 
     <div>
         {% if store.logo %}
@@ -40,5 +75,14 @@
                 <i class="sicon-paper-plane text-white" aria-hidden="true"></i>
             </button>
         </form>
+
+        {% if store.payment_logos|default([])|length %}
+            <div class="payment-logos flex flex-wrap items-center gap-2 mt-5">
+                {% for logo in store.payment_logos %}
+                    <img src="{{ logo }}" alt="" class="h-5 w-auto" loading="lazy">
+                {% endfor %}
+            </div>
+        {% endif %}
     </div>
+</div>
 </div>
